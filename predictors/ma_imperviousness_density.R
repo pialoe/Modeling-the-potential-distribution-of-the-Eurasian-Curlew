@@ -30,9 +30,9 @@ files=files[!files %in% dbffiles]
 #import all raster files in folder using lapply
 cop <- lapply(files, raster)
 
-#mosiac the two tiles that cover MS
+#mosiac tiles 
 imperviousness_density=mosaic(cop[[4]],cop[[5]], cop[[11]], cop[[12]], fun="mean")
-mapview(imperviousness_density) #check
+mapview(imperviousness_density) 
 
 
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/")
