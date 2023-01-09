@@ -1,4 +1,3 @@
-
 rm(list=ls() )
 
 #Preprocess and crop Copernicus data
@@ -24,7 +23,7 @@ files=files[!files %in% dbffiles]
 #import all raster files in folder using lapply
 cop <- lapply(files, raster)
 
-#mosiac the two tiles that cover MS
+#mosiac tiles 
 cop_grass_status_crop=mosaic(cop[[4]],cop[[5]], cop[[11]], cop[[12]], fun="mean")
 mapview(cop_grass_status_crop) #check
 
