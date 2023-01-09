@@ -25,7 +25,7 @@ cop <- lapply(files, raster)
 
 #mosiac tiles 
 cop_grass_status_crop=mosaic(cop[[4]],cop[[5]], cop[[11]], cop[[12]], fun="mean")
-mapview(cop_grass_status_crop) #check
+mapview(cop_grass_status_crop) 
 
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/")
 
@@ -45,15 +45,15 @@ crs(cop[[1]])
 #transform coordinates of cop coordinate system to gadm
 cop_grass_status_crop_proj=projectRaster(from=cop_grass_status_crop, crs=crs(umriss)) 
 
-mapview(cop_grass_status_crop_proj) #check 
+mapview(cop_grass_status_crop_proj) 
 crs(cop_grass_status_crop_proj)
 
-#crop 
+##mask
 cop_grass_status_mask=mask(cop_grass_status_crop_proj, umriss)
 mapview(cop_grass_status_mask) +mapview(umriss)
 mapview(cop_grass_status_mask)
 
-#save cropped but not aggregated file
+#save file
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/grassland_status/")
 writeRaster(cop_grass_status_mask, filename = "grassland_status_crop_20221019.tif", 
             overwrite=T)
