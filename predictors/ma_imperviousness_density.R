@@ -15,14 +15,10 @@ library(mapview)
 install.packages("beppr")
 library(beppr)
 
-
-
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/imperviousness_density/IMD_2018_010m_de_03035_v020/DATA/")
-
 
 #read in files
 files=list.files(pattern = ".tif")
-
 
 #exclude dbf files
 dbffiles = list.files(pattern='.dbf')
@@ -33,7 +29,6 @@ cop <- lapply(files, raster)
 #mosiac tiles 
 imperviousness_density=mosaic(cop[[4]],cop[[5]], cop[[11]], cop[[12]], fun="mean")
 mapview(imperviousness_density) 
-
 
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/")
 
@@ -53,16 +48,15 @@ crs(cop[[1]])
 #transform coordinates of cop coordinate system to gadm
 imperviousness_density_proj=projectRaster(from=imperviousness_density, crs=crs(umriss)) 
 
-mapview(imperviousness_density_proj) #check 
+mapview(imperviousness_density_proj) 
 crs(imperviousness_density_proj)
 
-
-#crop 
+##mask
 imperviousness_density_mask=mask(imperviousness_density_proj, umriss)
 mapview(imperviousness_density_mask) +mapview(umriss)
 mapview(imperviousness_density_mask)
 
-#save cropped but not aggregated file
+#save file
 setwd("/Users/pialoettert/Documents/masterdesaster/masterarbeit/praediktoren/imperviousness_density/")
 writeRaster(cop_imperviousness_density_crop, filename = "copernicus_imperviousness_density_crop_10m.tif", 
             overwrite=T)
