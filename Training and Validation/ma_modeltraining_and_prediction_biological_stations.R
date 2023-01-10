@@ -135,10 +135,10 @@ plot(varimp_biostat, main="Model 1",
 dev.off()()
 
 #save model
-saveRDS(model,file="model/ma_ffs_Model_biostat_2022-12-26.RDS") 
+saveRDS(model,file="model/ma_ffs_Model_1_biological_station.RDS") 
 
 ## load predstack
-pred_stack <- stack("praediktoren/stack/ma_pred_stack_20221223.grd")
+pred_stack <- stack("praediktoren/stack/ma_pred_stack_20221209.grd")
 
 #####prediction
 predict<-predict(pred_stack, model, savePrediction=TRUE)
@@ -147,7 +147,7 @@ writeRaster(predict,"model/prediction_biostat_20221226.grd",overwrite=TRUE) # Au
 
 predict_prob<-predict(pred_stack, model, type = "prob", savePrediction=TRUE)
 mapview(predict_prob)
-writeRaster(predict_prob,"model/prediction_prob_biostat_20221223.grd",overwrite=TRUE) # Ausschreiben!
+writeRaster(predict_prob,"model/prediction_probability_biological_stations.grd",overwrite=TRUE) # Ausschreiben!
 
 #classificationStats
 model$pred$mtry

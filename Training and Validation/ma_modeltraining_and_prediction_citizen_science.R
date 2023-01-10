@@ -145,10 +145,10 @@ plot(varimp_citizen_science, main="Model 2",
 dev.off()
 
 #save model
-saveRDS(model,file="model/ma_ffs_Model_citizen_science_2022-12-23.RDS") # modell speichern!
+saveRDS(model,file="model/ma_ffs_Model_2_citizen_science.RDS") # modell speichern!
 
 ## load predstack
-pred_stack <- stack("praediktoren/stack/ma_pred_stack_20221223.grd")
+pred_stack <- stack("praediktoren/stack/ma_pred_stack_20221209.grd")
 
 #####prediction
 predict<-predict(pred_stack, model, savePrediction=TRUE)
@@ -157,7 +157,7 @@ writeRaster(predict,"model/prediction_citizen_science_20221223.grd",overwrite=TR
 
 predict_prob<-predict(pred_stack, model, type = "prob", savePrediction=TRUE)
 mapview(predict_prob)
-writeRaster(predict_prob,"model/prediction_prob_citizen_science_20221223.grd",overwrite=TRUE) # Ausschreiben!
+writeRaster(predict_prob,"model/prediction_probability_citizen_science.grd",overwrite=TRUE) # Ausschreiben!
 
 #classificationStats
 model$pred$mtry
